@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using edk.ManagerFeaturesToggles.Domain.Contracts.Common;
-using edk.Tools;
+using edk.Tools.Common;
 
 namespace edk.ManagerFeaturesToggles.Domain.Contracts.Repositories.Generic;
 public interface IReadGenericRepository<TEntity> where TEntity : IEntity

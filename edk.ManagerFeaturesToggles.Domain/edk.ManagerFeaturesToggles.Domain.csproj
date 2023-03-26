@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="edk.FuscLibrary.Contracts" Version="1.0.0" />
-    <PackageReference Include="edk.ToolsLibrary" Version="1.0.0" />
+    <PackageReference Include="edk.Fusc.Contracts" Version="1.0.0" />
+    <PackageReference Include="edk.Tools" Version="1.0.0" />
     <PackageReference Include="FluentValidation" Version="11.5.1" />
   </ItemGroup>
 

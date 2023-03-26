@@ -1,5 +1,6 @@
 ﻿using edk.ManagerFeaturesToggles.Domain.Entities;
 using edk.Tools;
+using edk.Tools.NoIf.Boolean;
 
 namespace edk.ManagerFeatureToggles.Infra.Data;
 
@@ -7,28 +8,17 @@ public static class FeatureToggleDbContextSeed
 {
     public static void SeedData(this FeatureToggleDbContext context)
     {
-        context.Customers.Any().WhenFalse(() =>
-        {
-            context.Customers.AddRange(new List<Customer>
-            {
-                new Customer("Panasonic","Kartic","panasonic@email.com","pana","123456")
 
-            });
+        context.Customers.Any().IfFalse(() =>
+            context.Customers.AddRange(new List<Customer> { 
+                new Customer("Panasonic", "Kartic", "panasonic@email.com", "pana", "123456") 
+            })
+        );
+        context.Tenants.Any().IfFalse(() =>
+            context.Tenants.AddRange(new List<Tenant> { new("Pena Cloud", 1) })
+        );
 
-        });
-
-        context.Tenants.Any().WhenFalse(() =>
-        {
-            context.Tenants.AddRange(new List<Tenant>
-            {
-                new("Pena Cloud", 1)
-
-            });
-
-        });
-
-
-        context.Enviroments.Any().WhenFalse(() =>
+        context.Enviroments.Any().IfFalse(() =>
         {
             context.Enviroments.AddRange(new List<EnvironmentBuild>
             {
@@ -41,7 +31,7 @@ public static class FeatureToggleDbContextSeed
 
         });
 
-        context.Systems.Any().WhenFalse(() =>
+        context.Systems.Any().IfFalse(() =>
         {
             context.Systems.AddRange(new List<SystemApp>
             {
@@ -51,7 +41,7 @@ public static class FeatureToggleDbContextSeed
             });
         });
 
-        context.FeatureToggles.Any().WhenFalse(() =>
+        context.FeatureToggles.Any().IfFalse(() =>
         {
             context.FeatureToggles.AddRange(new List<FeatureToggle>
             {

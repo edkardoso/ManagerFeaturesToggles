@@ -1,6 +1,8 @@
 ﻿using edk.ManagerFeaturesToggles.Domain.Contracts.Common;
 using edk.ManagerFeaturesToggles.Domain.Contracts.Repositories.Generic;
-using edk.Tools;
+using edk.Tools.Common;
+using edk.Tools.NoIf.Boolean;
+using edk.Tools.NoIf.Miscellaneous;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -35,7 +37,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class, IEnti
     {
         var entityOption = await GetByIdAsync(id);
 
-        entityOption.IsNull.Not().WhenTrue(async () =>
+        entityOption.IsNull.Not().IfTrue(async () =>
         {
             await DeleteAsync(entityOption.Match(e => e, () => null));
         });
